@@ -65,7 +65,7 @@ class Solution:
 
         to_append = None
         while i < n or j < m:
-
+            # Case 1: Traverse both arrays if possible
             if i < n and j < m:
                 if nums1[i] < nums2[j]:
                     to_append = nums1[i]
@@ -73,9 +73,11 @@ class Solution:
                 else:
                     to_append = nums2[j]
                     j += 1
+            # If array1 still has elements but array2 has been consumed
             elif i < n and j >= m:
                 to_append = nums1[i]
                 i += 1
+            # If array2 still has elements but array1 has been consumed
             elif i >= n and j < m:
                 to_append = nums2[j]
                 j += 1
@@ -83,12 +85,15 @@ class Solution:
             merged.append(to_append)
             current_size += 1
 
+            # Stop when we reached the median index
             if current_size - 1  == median_idx:
                 break
 
-        if total_size % 2 == 1:  # If exact median, return the median_idx
+        # Return the median according to each case
+        # Case 1: exact 
+        if total_size % 2 == 1:median
             return merged[-1]
 
-        # Else, a two-sided median
+        # Case 2: two-sided median
         return (merged[-1] + merged[-2]) / 2
 ```
